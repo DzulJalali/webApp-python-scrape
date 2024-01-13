@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <title>Web Scraping App</title>
+  </head>
+  <body>
+    <header>
+      <h1>Web Scraping App</h1>
+    </header>
+
+    <main>
+      <form method="post">
+        <label for="website_url">Enter Website URL:</label>
+        <input type="text" id="website_url" name="website_url" required />
+        <button type="submit">Scrape</button>
+      </form>
+
+      {% if website_url %}
+      <section>
+        {% for data in scraped_data %}
+        <h2>{{ data['title'] }}</h2>
+        {% if data['image_url'] %}
+        <img src="{{ data['image_url'] }}" alt="Book Image" />
+        {% endif %}
+        <p>Price: {{ data['price'] }}</p>
+        <p>Availability: {{ data['availability'] }}</p>
+        <p>Rating: {{ data['rating'] }}</p>
+        <p><a href="{{ data['book_url'] }}" target="_blank">Book URL</a></p>
+        {% endfor %}
+      </section>
+      {% endif %}
+    </main>
+    <div id="footer">
+      <p>&copy; 2024 Dzul Jalali Wal Ikram. All rights reserved.</p>
+    </div>
+  </body>
+</html>

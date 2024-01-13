@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <title>PDF Processing</title>
+  </head>
+  <body>
+    <header>
+      <h1>PDF Processing</h1>
+    </header>
+
+    <main>
+      <form method="post" enctype="multipart/form-data">
+        <label for="pdf_file">Upload PDF File:</label>
+        <input
+          type="file"
+          id="pdf_file"
+          name="pdf_file"
+          accept=".pdf"
+          required
+        />
+        <button type="submit">Process PDF</button>
+      </form>
+
+      {% if pdf_text %}
+      <section>
+        <h2>PDF Text:</h2>
+        <div>
+          <h3>{{ pdf_filename }}</h3>
+          <p>{{ pdf_text }}</p>
+        </div>
+      </section>
+      {% endif %} {% if animals %}
+      <section>
+        <h2>Animals:</h2>
+        <ul>
+          {% for animal in animals %}
+          <li>{{ animal }}</li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %} {% if numbers %}
+      <section>
+        <h2>Numbers:</h2>
+        <ul>
+          {% for number in numbers %}
+          <li>{{ number }}</li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %} {% if pdf_tables %}
+      <section>
+        <h2>PDF Tables:</h2>
+        <table border="1">
+          {% for row in pdf_tables %}
+          <tr>
+            {% for cell in row %}
+            <td>{{ cell }}</td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </table>
+      </section>
+      {% endif %}
+    </main>
+    <div id="footer">
+      <p>&copy; 2024 Dzul Jalali Wal Ikram. All rights reserved.</p>
+    </div>
+  </body>
+</html>

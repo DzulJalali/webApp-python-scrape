@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Input into CRM</title>
+  </head>
+  <body>
+    <header>
+      <h1>Input into CRM</h1>
+    </header>
+
+    <main>
+      <section>
+        <div class="messages-container">
+          {% if success_messages %}
+          <h2>Success Messages:</h2>
+          <ul>
+            {% for message in success_messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+          {% else %}
+          <p>No data input into CRM.</p>
+          {% endif %}
+        </div>
+      </section>
+    </main>
+    <div id="footer">
+      <p>&copy; 2024 Dzul Jalali Wal Ikram. All rights reserved.</p>
+    </div>
+  </body>
+</html>
