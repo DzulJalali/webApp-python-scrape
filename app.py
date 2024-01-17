@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, jsonify
 import os
 import re
 import csv
@@ -179,6 +179,25 @@ def input_into_crm():
             return render_template('input_into_crm.html', success_messages=success_messages)
 
     return render_template('input_into_crm.html')
-    
+
+@app.route('/display_crm_data', methods=['GET'])
+def display_crm_data():
+    try:
+        # Make an HTTP GET request to the fetch_crm_data route
+        headers = {
+            'Authorization': f'{INSIGHTLY_API_KEY}',
+            'Content-Type': 'application/json',
+        }
+        response = requests.get(INSIGHTLY_API_ENDPOINT, headers=headers)
+
+        # Check if the request was successful (status code 200)
+        if response.status_code == 200:
+            crm_data = response.json()
+            return render_template('display_crm_data.html', crm_data=crm_data)
+        else:
+            return render_template('display_crm_data.html', crm_data=None, error=f'Failed to fetch CRM data. Status code: {response.status_code}')
+    except Exception as e:
+        return render_template('display_crm_data.html', crm_data=None, error=f'An error occurred: {str(e)}')
+
 if __name__ == '__main__':
     app.run(debug=True)

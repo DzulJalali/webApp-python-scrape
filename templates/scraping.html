@@ -15,26 +15,28 @@
     </header>
 
     <main>
-      <form method="post">
-        <label for="website_url">Enter Website URL:</label>
-        <input type="text" id="website_url" name="website_url" required />
-        <button type="submit">Scrape</button>
-      </form>
+      <div class="data-container">
+        <form method="post">
+          <label for="website_url">Enter Website URL:</label>
+          <input type="text" id="website_url" name="website_url" required />
+          <button type="submit">Scrape</button>
+        </form>
 
-      {% if website_url %}
-      <section>
-        {% for data in scraped_data %}
-        <h2>{{ data['title'] }}</h2>
-        {% if data['image_url'] %}
-        <img src="{{ data['image_url'] }}" alt="Book Image" />
+        {% if website_url %}
+        <section>
+          {% for data in scraped_data %}
+          <h2>{{ data['title'] }}</h2>
+          {% if data['image_url'] %}
+          <img src="{{ data['image_url'] }}" alt="Book Image" />
+          {% endif %}
+          <p>Price: {{ data['price'] }}</p>
+          <p>Availability: {{ data['availability'] }}</p>
+          <p>Rating: {{ data['rating'] }}</p>
+          <p><a href="{{ data['book_url'] }}" target="_blank">Book URL</a></p>
+          {% endfor %}
+        </section>
         {% endif %}
-        <p>Price: {{ data['price'] }}</p>
-        <p>Availability: {{ data['availability'] }}</p>
-        <p>Rating: {{ data['rating'] }}</p>
-        <p><a href="{{ data['book_url'] }}" target="_blank">Book URL</a></p>
-        {% endfor %}
-      </section>
-      {% endif %}
+      </div>
     </main>
     <div id="footer">
       <p>&copy; 2024 Dzul Jalali Wal Ikram. All rights reserved.</p>

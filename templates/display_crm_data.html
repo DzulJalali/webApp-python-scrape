@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <title>Display CRM Data</title>
+  </head>
+  <body>
+    <header>
+      <h1>Display CRM Data</h1>
+    </header>
+
+    <div class="crm-data-container">
+      {% if crm_data %}
+      <table>
+        <thead>
+          <tr>
+            {% for key in crm_data[0].keys() %}
+            <th>{{ key }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for entry in crm_data %}
+          <tr>
+            {% for value in entry.values() %}
+            <td>{{ value }}</td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p>No CRM data available.</p>
+      {% endif %}
+    </div>
+
+    <div id="footer">
+      <p>&copy; 2024 Dzul Jalali Wal Ikram. All rights reserved.</p>
+    </div>
+  </body>
+</html>
